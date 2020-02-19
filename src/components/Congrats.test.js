@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Congrats from "./Congrats";
-import {checkProps, findByTestAttr} from "../test/utils/testUtils";
+import {checkProps, findByTestAttr} from "../../test/utils/testUtils";
 
 const defaultProps = {success: false};
 const setup = (props = {}) => {
