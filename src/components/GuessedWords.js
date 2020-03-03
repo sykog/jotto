@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 
 const GuessedWords = props => {
   let contents;
+  let guessCounter = props.guessedWords.length;
 
   if (props.guessedWords.length === 0) {
     contents = (
       <span data-test="guess-instructions">
-       Try to guess the secret word!
+       Try to guess the 5 letter secret word!
      </span>
     )
   } else {
     const guessedWordsRows = props.guessedWords
       .map((word, index) => (
         <tr data-test="guessed-word" key={index}>
+          <td>{index}</td>
           <td>{word.guessedWord}</td>
           <td>{word.letterMatchCount}</td>
         </tr>
@@ -25,6 +27,7 @@ const GuessedWords = props => {
         <table className="table table-sm">
           <thead className="thead-light">
           <tr>
+            <th>Guess Number</th>
             <th>Guess</th>
             <th>Matching Letters</th>
           </tr>
@@ -34,6 +37,9 @@ const GuessedWords = props => {
           {guessedWordsRows}
           </tbody>
         </table>
+        <p data-test="guess-counter">
+          You have made {guessCounter} {guessCounter > 1 ? "guesses" : "guess"}
+        </p>
       </div>
     );
   }
