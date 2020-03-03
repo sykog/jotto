@@ -94,4 +94,8 @@ describe('submit button', () => {
 
     expect(guessedWordArg).toBe(guessedWord);
   });
-})
+
+  it('input box clears on submit', () => {
+    expect(wrapper.state('currentGuess')).toBe('');
+  });
+});
