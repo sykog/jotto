@@ -5,6 +5,8 @@ import Input, {Input as UnconnectedInput} from "./Input";
 
 const setup = (initialState={}) => {
   const store = storeFactory(initialState);
+  // dive shallow renders the one non-DOM child of the current wrapper, and return a wrapper around the result
+  // I think it's needed to access the input and submit buttons
   const wrapper = shallow(<Input store={store}/>).dive().dive();
 
   return wrapper;

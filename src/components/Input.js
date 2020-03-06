@@ -7,7 +7,7 @@ export class Input extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {currentGuess: null};
+    this.state = {currentGuess: ''};
     this.submitGuessedWord = this.submitGuessedWord.bind(this);
   }
 
@@ -35,7 +35,7 @@ export class Input extends Component {
           <button data-test="submit-button"
                   className="btn btn-primary mb-2"
                   type="submit"
-                  onClick={event => this.submitGuessedWord(event)}>
+                  onClick={this.submitGuessedWord}>
             Submit
           </button>
         </form>

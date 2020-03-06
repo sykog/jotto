@@ -1,8 +1,7 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import {findByTestAttr, checkProps} from "../../test/utils/testUtils";
+import {checkProps, findByTestAttr} from "../../test/utils/testUtils";
 import GuessedWords from "./GuessedWords";
-import counterControl from "../../../redux-guide/src/components/CounterControl/CounterControl";
 
 const defaultProps = {
   guessedWords: [{guessedWord: 'train', letterMatchCount: 3}]
