@@ -17,7 +17,10 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
-        success: false,
+        gameStatus: {
+          success: false,
+          givenUp: false
+        },
         guessedWords: [{
           guessedWord: unsuccessfulGuess,
           letterMatchCount: 3
@@ -31,7 +34,10 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         secretWord,
-        success: true,
+        gameStatus: {
+          success: true,
+          givenUp: false
+        },
         guessedWords: [
           {guessedWord: secretWord, letterMatchCount: 5}
         ]
@@ -54,7 +60,10 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         secretWord,
-        success: false,
+        gameStatus: {
+          success: false,
+          givenUp: false
+        },
         guessedWords: [
           ...guessedWords,
           {guessedWord: unsuccessfulGuess, letterMatchCount: 3}
@@ -68,7 +77,10 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         secretWord,
-        success: true,
+        gameStatus: {
+          success: true,
+          givenUp: false
+        },
         guessedWords: [
           ...guessedWords,
           {guessedWord: secretWord, letterMatchCount: 5}
@@ -90,7 +102,7 @@ describe('guessWord action dispatcher', () => {
       });
 
       it('sets success prop to false', () => {
-        expect(newState.success).toBe(false);
+        expect(newState.gameStatus.success).toBe(false);
       });
     });
   });

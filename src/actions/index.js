@@ -5,7 +5,8 @@ export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
   GUESS_WORD: 'GUESS_WORD',
   SET_SECRET_WORD: 'SET_SECRET_WORD',
-  RESET_GAME: 'RESET_GAME'
+  RESET_GAME: 'RESET_GAME',
+  GIVE_UP: 'GIVE_UP'
 };
 
 export const guessWord = guessedWord => {
@@ -25,9 +26,8 @@ export const guessWord = guessedWord => {
 };
 
 export const getSecretWord = () => {
-  console.log('called')
+
   return dispatch => {
-    console.log('again')
     return axios.get('http://localhost:3030').then(response => {
       dispatch({
         type: actionTypes.SET_SECRET_WORD,
@@ -38,7 +38,6 @@ export const getSecretWord = () => {
 };
 
 export const resetGame = () => {
-
   return dispatch => {
     dispatch(getSecretWord());
     dispatch({
@@ -46,3 +45,10 @@ export const resetGame = () => {
     });
   }
 };
+
+export const giveUp = () => dispatch => {
+  dispatch({
+    type: actionTypes.GIVE_UP,
+    payload: true
+  })
+}

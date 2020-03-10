@@ -11,12 +11,12 @@ const setup = (initialState={}) => {
 };
 
 describe('redux props', () => {
-  it('has a success state object as a prop', () => {
-    const success = true;
-    const wrapper = setup({success});
-    const successProp = wrapper.instance().props.success;
+  it('has a gameStatus state object as a prop', () => {
+    const gameStatus = {success: false, givenUp: false};
+    const wrapper = setup({gameStatus});
+    const gameStatusProp = wrapper.instance().props.gameStatus;
 
-    expect(successProp).toBe(success);
+    expect(gameStatusProp).toEqual(gameStatus);
   });
   it('has a secretWord state object as a prop', () => {
     const secretWord = 'party';
@@ -44,7 +44,7 @@ it('getSecretWord runs on App mount', () => {
   const getSecretWordMock = jest.fn();
   const props = {
     getSecretWord: getSecretWordMock,
-    success: false,
+    gameStatus: {success: false, givenUp: false},
     guessedWords: []
   }
 

@@ -22,7 +22,7 @@ export class Input extends Component {
   }
 
   render() {
-    const contents = this.props.success ? null
+    const contents = this.props.success || this.props.givenUp ? null
       : (
         <form className="form-inline">
           <input data-test="input-box"
@@ -48,8 +48,8 @@ export class Input extends Component {
   }
 };
 
-const mapStateToProps = ({success}) => {
-  return {success};
+const mapStateToProps = ({gameStatus: {success, givenUp}}) => {
+  return {success, givenUp};
 };
 
 export default connect(mapStateToProps, {guessWord})(Input);

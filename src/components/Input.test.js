@@ -16,7 +16,7 @@ describe('render', () => {
   describe('word has not been guessed', () => {
     let wrapper;
     beforeEach(() => {
-      const initialState = {success: false};
+      const initialState = {gameStatus:{success: false}};
       wrapper = setup(initialState);
     });
 
@@ -37,7 +37,7 @@ describe('render', () => {
   describe('word has been guessed', () => {
     let wrapper;
     beforeEach(() => {
-      const initialState = {success: true};
+      const initialState = {gameStatus: {success: true}};
       wrapper = setup(initialState);
     });
 
@@ -57,12 +57,12 @@ describe('render', () => {
 });
 
 describe('redux props', () => {
-  it('has success state as a prop', () => {
-    const success = true;
-    const wrapper = setup({success});
+  it('has a success state with false as a prop', () => {
+    const gameStatus = {gameStatus: {givenUp: false, success: false}};
+    const wrapper = setup(gameStatus);
     const successProp = wrapper.instance().props.success;
 
-    expect(successProp).toBe(success);
+    expect(successProp).toBe(gameStatus.gameStatus.success);
   });
   it('guessWord action creator is a function prop', () => {
     const wrapper = setup();
