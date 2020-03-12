@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getSecretWord} from "./actions";
+import {chooseSecretWord} from "./actions";
 import GuessedWords from "./components/GuessedWords";
 import Congrats from "./components/Congrats";
 import Input from './components/Input';
@@ -34,4 +34,4 @@ const mapStateToProps = state => {
   return {gameStatus, guessedWords, secretWord};
 };
 
-export default connect(mapStateToProps, {getSecretWord})(UnconnectedApp);
+export default connect(mapStateToProps, {getSecretWord: chooseSecretWord})(UnconnectedApp);

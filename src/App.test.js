@@ -32,7 +32,7 @@ describe('redux props', () => {
 
     expect(guessedWordsProp).toEqual(guessedWords);
   });
-  it('has a function prop getSecretWord', () => {
+  it('has a function prop chooseSecretWord', () => {
     const wrapper = setup();
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
 
@@ -40,7 +40,7 @@ describe('redux props', () => {
   });
 });
 
-it('getSecretWord runs on App mount', () => {
+it('chooseSecretWord runs on App mount', () => {
   const getSecretWordMock = jest.fn();
   const props = {
     getSecretWord: getSecretWordMock,

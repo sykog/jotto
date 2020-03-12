@@ -25,25 +25,27 @@ export const guessWord = guessedWord => {
   };
 };
 
-export const getSecretWord = () => {
-
-  return dispatch => {
+export const chooseSecretWord = (secretWord = '') => dispatch => {
+  if (secretWord) {
+    dispatch({
+      type: actionTypes.SET_SECRET_WORD,
+      payload: secretWord
+    });
+  } else {
     return axios.get('http://localhost:3030').then(response => {
       dispatch({
         type: actionTypes.SET_SECRET_WORD,
         payload: response.data
       });
     });
-  };
+  }
 };
 
-export const resetGame = () => {
-  return dispatch => {
-    dispatch(getSecretWord());
-    dispatch({
-      type: actionTypes.RESET_GAME
-    });
-  }
+export const resetGame = (secretWord = '') => dispatch => {
+  dispatch(chooseSecretWord(secretWord));
+  dispatch({
+    type: actionTypes.RESET_GAME
+  });
 };
 
 export const giveUp = () => dispatch => {
