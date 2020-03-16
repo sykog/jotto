@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 import {findByTestAttr, storeFactory} from "../../test/utils/testUtils";
 import ResetGame, {ResetGame as ResetGameComponent} from "./ResetGame";
 
-const setup = (initialState = {resetting: false}) => {
+const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
   const wrapper = shallow(<ResetGame store={store} />).dive();
 
@@ -13,7 +13,7 @@ const setup = (initialState = {resetting: false}) => {
 describe('renders', () => {
   let wrapper;
 
-  describe('before reset button is pressed', () => {
+  describe('resetting state is false', () => {
     beforeEach(() => {
       wrapper = setup();
     });
@@ -40,9 +40,10 @@ describe('renders', () => {
     });
   });
 
-  describe('when reset button is pressed', () => {
+  describe('resetting state is true', () => {
     beforeEach(() => {
-      wrapper = setup({resetting: true});
+      wrapper = setup();
+      wrapper.setState({resetting: true});
     });
 
     it('renders the component without error', () => {
@@ -68,21 +69,32 @@ describe('renders', () => {
   });
 });
 
+
+
 describe('reset buttons', () => {
   let resetGameMock;
   let wrapper;
-  const testButtonPress = (secretWord, testId) => {
+  const testButtonPress = (secretWord, testId, resetting = true) => {
     resetGameMock = jest.fn();
     wrapper = shallow(<ResetGameComponent resetGame={resetGameMock}/>);
-    wrapper.setState({secretWord})
+    wrapper.setState({secretWord, resetting});
 
     const resetButton = findByTestAttr(wrapper, testId);
     resetButton.simulate('click', {
       preventDefault() {
       }
     });
-    expect(resetGameMock.mock.calls.length).toBe(1);
   }
+
+  it('sets resetting to false when the cancel button is clicked', () => {
+    testButtonPress('','reset-game-cancel');
+    expect(wrapper.state('resetting')).toBe(false);
+  });
+
+  it('sets resetting to true when thd reset button is clicked', () => {
+    testButtonPress('','reset-game-button', false);
+    expect(wrapper.state('resetting')).toBe(true);
+  });
 
   it('calls reset game from server action when the button is clicked', () => {
     testButtonPress('','reset-server');
@@ -113,7 +125,7 @@ describe('reset buttons', () => {
       });
 
       it('does not reset the input', () => {
-        const secretWord = 'train'
+        const secretWord = 'taco'
         testButtonPress(secretWord, 'reset-user');
         expect(wrapper.state('secretWord')).toEqual(secretWord);
       });

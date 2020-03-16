@@ -26,12 +26,7 @@ export const guessWord = guessedWord => {
 };
 
 export const chooseSecretWord = (secretWord = '') => dispatch => {
-  if (secretWord) {
-    dispatch({
-      type: actionTypes.SET_SECRET_WORD,
-      payload: secretWord
-    });
-  } else {
+  if (!secretWord) {
     return axios.get('http://localhost:3030').then(response => {
       dispatch({
         type: actionTypes.SET_SECRET_WORD,
@@ -39,6 +34,11 @@ export const chooseSecretWord = (secretWord = '') => dispatch => {
       });
     });
   }
+  
+  dispatch({
+    type: actionTypes.SET_SECRET_WORD,
+    payload: secretWord
+  });
 };
 
 export const resetGame = (secretWord = '') => dispatch => {
