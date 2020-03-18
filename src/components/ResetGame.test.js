@@ -76,7 +76,6 @@ describe("renders", () => {
         wrapper = setup();
         wrapper.setState({ resetting: true, errorMessage: true });
         const errorMessage = findByTestAttr(wrapper, "error-message");
-        console.log(wrapper.state("errorMessage"));
 
         expect(errorMessage.length).toBe(1);
       });
