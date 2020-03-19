@@ -1,33 +1,27 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { chooseSecretWord } from "./actions";
-import GuessedWords from "./components/GuessedWords";
-import Congrats from "./components/Congrats";
-import Input from "./components/Input";
-import ResetGame from "./components/ResetGame";
-import "./App.css";
-import GiveUp from "./components/GiveUp";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './App.css';
+
+import GuessedWords from './GuessedWords';
+import Congrats from './Congrats';
+import Input from './Input';
+import { getSecretWord } from './actions';
 
 export class UnconnectedApp extends Component {
+  /**
+   * @method componentDidMount
+   * @returns {undefined}
+   */
   componentDidMount() {
-    this.props.chooseSecretWord();
+    // get the secret word
+    this.props.getSecretWord();
   }
 
   render() {
-    const serverError =
-      typeof this.props.secretWord == "object" ? (
-        <p className="alert alert-danger" data-test="error-message">
-          Error: Could not connect to the server
-        </p>
-      ) : null;
-    //console.log(this.props.secretWord);
     return (
       <div className="container">
         <h1>Jotto</h1>
-        <ResetGame />
-        <GiveUp />
-        {serverError}
-        <Congrats success={this.props.gameStatus.success} />
+        <Congrats success={this.props.success} />
         <Input />
         <GuessedWords guessedWords={this.props.guessedWords} />
       </div>
@@ -35,9 +29,9 @@ export class UnconnectedApp extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { gameStatus, guessedWords, secretWord } = state;
-  return { gameStatus, guessedWords, secretWord };
-};
+const mapStateToProps = (state) => {
+  const { success, guessedWords, secretWord } = state;
+  return { success, guessedWords, secretWord };
+}
 
-export default connect(mapStateToProps, { chooseSecretWord })(UnconnectedApp);
+export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);

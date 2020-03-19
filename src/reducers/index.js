@@ -1,10 +1,10 @@
-import {combineReducers} from "redux";
-import gameStatus from './successReducer';
-import guessedWords from './guessedWordsReducer'
+import { combineReducers } from 'redux';
+import success from './successReducer';
+import guessedWords from './guessedWordsReducer';
 import secretWord from './secretWordReducer';
 
 export default combineReducers({
-  gameStatus,
+  success,
   guessedWords,
-  secretWord
+  secretWord,
 });

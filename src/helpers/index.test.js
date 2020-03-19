@@ -1,20 +1,17 @@
-import {getLetterMatchCount} from "./index";
+import { getLetterMatchCount } from './';
 
-describe('getLetterMatchCount()', () => {
+describe('getLetterMatchCount', () => {
   const secretWord = 'party';
-
-  it('returns correct count when there are no matching letters', () => {
-    const letterMathCount = getLetterMatchCount('bones', secretWord);
-    expect(letterMathCount).toBe(0);
+  test('returns correct count when there are no matching letters', () => {
+    const letterMatchCount = getLetterMatchCount('bones', secretWord);
+    expect(letterMatchCount).toBe(0);
   });
-
-  it('returns correct count when there are 3 matching letters', () => {
-    const letterMathCount = getLetterMatchCount('train', secretWord);
-    expect(letterMathCount).toBe(3);
+  test('returns the correct count where there are 3 matching letters', () => {
+    const letterMatchCount = getLetterMatchCount('train', secretWord);
+    expect(letterMatchCount).toBe(3);
   });
-
-  it('returns correct count when there are duplicate matching letters in the guess', () => {
-    const letterMathCount = getLetterMatchCount('parka', secretWord);
-    expect(letterMathCount).toBe(3);
+  test('returns correct count when there are duplicate letters in the guess', () => {
+    const letterMatchCount = getLetterMatchCount('parka', secretWord);
+    expect(letterMatchCount).toBe(3);
   });
 });

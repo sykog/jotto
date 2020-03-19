@@ -1,16 +1,15 @@
-import {actionTypes} from "../actions";
+import { actionTypes } from '../actions';
 
-export default (state = {
-  success: false,
-  givenUp: false
-}, action) => {
-  switch (action.type) {
+/**
+ * @function successReducer
+ * @param {array} state - Array of guessed words.
+ * @param {object} action - action to be reduced.
+ * @returns {boolean} - new success state.
+ */
+export default (state=false, action) => {
+  switch(action.type) {
     case (actionTypes.CORRECT_GUESS):
-      return {...state, success: true};
-    case (actionTypes.RESET_GAME):
-      return {...state, success: false, givenUp: false}
-    case (actionTypes.GIVE_UP):
-      return {...state, givenUp: true}
+      return true;
     default:
       return state;
   }
