@@ -28,7 +28,7 @@ describe("gerSecretWord action creator", () => {
     });
   });
 
-  it("returns error object when unable to connect to the server", () => {
+  it("returns an error object when unable to connect to the server", () => {
     const store = storeFactory();
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -40,7 +40,6 @@ describe("gerSecretWord action creator", () => {
 
     return store.dispatch(chooseSecretWord()).then(() => {
       const newState = store.getState();
-      console.log(store);
       expect(typeof newState.secretWord).toBe("object");
     });
   });
